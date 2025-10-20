@@ -81,4 +81,58 @@ namespace Figuras
             graphics.DrawEllipse(pen, x, y, radio, radio);
         }
     }
+
+    public class TrianguloIsosceles : Figura
+    {
+    private int baseTriangulo;
+    private int altura;
+
+        public TrianguloIsosceles(int baseTriangulo, int altura)
+        {
+            this.baseTriangulo = baseTriangulo;
+            this.altura = altura;
+            this.colorFigura = GenerarColorAleatorio();
+        }
+
+        public override void Dibujar(Pen pen, Graphics graphics, int x, int y)
+        {
+            pen.Color = this.colorFigura;
+
+            Point[] points = new Point[3]
+            {
+                new Point(x, y + altura),
+                new Point(x + baseTriangulo / 2, y),
+                new Point(x + baseTriangulo, y + altura)
+            };
+
+            graphics.DrawPolygon(pen, points);
+        }
+    }
+
+    public class TrianguloEquilatero : Figura
+    {
+        private int lado;
+
+        public TrianguloEquilatero(int lado)
+        {
+            this.lado = lado;
+            this.colorFigura = GenerarColorAleatorio();
+        }
+
+        public override void Dibujar(Pen pen, Graphics graphics, int x, int y)
+        {
+            pen.Color = this.colorFigura;
+
+            double altura = Math.Sqrt(3) / 2 * lado;
+
+            Point[] points = new Point[3]
+            {
+                new Point(x, (int)(y + altura)),
+                new Point(x + lado / 2, y),
+                new Point(x + lado, (int)(y + altura))
+            };
+
+            graphics.DrawPolygon(pen, points);
+        }
+    }
 }
